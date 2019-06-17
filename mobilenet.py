@@ -17,7 +17,7 @@
 
 # coding: utf-8
 # pylint: disable= arguments-differ,unused-argument,missing-docstring
-"""MobileNet and MobileNetV2, implemented in Gluon."""
+"""MobileNetV3, implemented in Gluon."""
 __all__ = [
     'MobileNetV3',
     'mobilenet_v3_1_0',
@@ -35,7 +35,7 @@ from mxnet.gluon.block import HybridBlock
 
 # Helpers
 class RELU6(nn.HybridBlock):
-    """Relu6 used in MobileNetV2."""
+    """Relu6 used in MobileNetV3."""
 
     def __init__(self, **kwargs):
         super(RELU6, self).__init__(**kwargs)
@@ -83,11 +83,7 @@ class SEBlock(nn.HybridBlock):
 
 
 class LinearBottleneck(nn.HybridBlock):
-    r"""LinearBottleneck used in MobileNetV2 model from the
-    `"Inverted Residuals and Linear Bottlenecks:
-      Mobile Networks for Classification, Detection and Segmentation"
-    <https://arxiv.org/abs/1801.04381>`_ paper.
-
+    r"""
     Parameters
     ----------
     in_channels : int
@@ -144,10 +140,7 @@ class LinearBottleneck(nn.HybridBlock):
         return out
 
 class MobileNetV3Large(nn.HybridBlock):
-    r"""MobileNetV2 model from the
-    `"Inverted Residuals and Linear Bottlenecks:
-      Mobile Networks for Classification, Detection and Segmentation"
-    <https://arxiv.org/abs/1801.04381>`_ paper.
+    r"""
     Parameters
     ----------
     multiplier : float, default 1.0
@@ -214,10 +207,7 @@ class MobileNetV3Large(nn.HybridBlock):
         return x
 
 class MobileNetV3Small(nn.HybridBlock):
-    r"""MobileNetV2 model from the
-    `"Inverted Residuals and Linear Bottlenecks:
-      Mobile Networks for Classification, Detection and Segmentation"
-    <https://arxiv.org/abs/1801.04381>`_ paper.
+    r"""
     Parameters
     ----------
     multiplier : float, default 1.0
@@ -284,10 +274,7 @@ class MobileNetV3Small(nn.HybridBlock):
 
 def get_mobilenet_v3_large(multiplier, pretrained=False, ctx=cpu(),
                      root='~/.mxnet/models', norm_layer=BatchNorm, norm_kwargs=None, **kwargs):
-    r"""MobileNetV2 model from the
-    `"Inverted Residuals and Linear Bottlenecks:
-      Mobile Networks for Classification, Detection and Segmentation"
-    <https://arxiv.org/abs/1801.04381>`_ paper.
+    r"""
 
     Parameters
     ----------
@@ -314,11 +301,7 @@ def get_mobilenet_v3_large(multiplier, pretrained=False, ctx=cpu(),
 
 def get_mobilenet_v3_small(multiplier, pretrained=False, ctx=cpu(),
                      root='~/.mxnet/models', norm_layer=BatchNorm, norm_kwargs=None, **kwargs):
-    r"""MobileNetV2 model from the
-    `"Inverted Residuals and Linear Bottlenecks:
-      Mobile Networks for Classification, Detection and Segmentation"
-    <https://arxiv.org/abs/1801.04381>`_ paper.
-
+    r"""
     Parameters
     ----------
     multiplier : float
