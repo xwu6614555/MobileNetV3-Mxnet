@@ -17,7 +17,7 @@
 
 # coding: utf-8
 # pylint: disable= arguments-differ,unused-argument,missing-docstring
-"""MobileNetV3, implemented in Gluon."""
+"""MobileNet and MobileNetV3, implemented in Gluon."""
 __all__ = [
     'MobileNetV3',
     'mobilenet_v3_1_0',
@@ -169,8 +169,8 @@ class MobileNetV3Large(nn.HybridBlock):
                                      + [40] * 3 + [80] * 4 + [112] * 3 + [160]]
                 channels_group = [int(x * multiplier) for x in [16] + [24] * 2 + [40] * 3
                                   + [80] * 4 + [112] * 3 + [160] * 2]
-                exp_size = [16] + [64] + [72] * 2 + [120] * 2 + [240] + [200] + [184] * 2 + \
-                           [480] + [672] * 3 + [960]
+                exp_size = [int(x*multiplier) for x in [16] + [64] + [72] * 2 + [120] * 2 + [240] + [200] + [184] * 2 + \
+                           [480] + [672] * 3 + [960]]
                 strides = [1, 2] * 2 + [1, 1, 2] + [1] * 6 + [2] + [1]
                 use_se = [False]*3 + [True]*3 + [False]*4 + [True]*5
                 kernel_size = [3]*3 + [5]*3 + [3]*6 +[5]*3
@@ -185,7 +185,7 @@ class MobileNetV3Large(nn.HybridBlock):
                                                        kernel_size=kz,
                                                        hswish=hswish,
                                                        norm_layer=BatchNorm, norm_kwargs=None))
-                _add_conv(self.features,960,hswish=True,
+                _add_conv(self.features,int(960*multiplier),hswish=True,
                           norm_layer=BatchNorm, norm_kwargs=None)
                 self.features.add(nn.GlobalAvgPool2D())
                 #self.features.add(HSwish())
@@ -236,7 +236,7 @@ class MobileNetV3Small(nn.HybridBlock):
                                      + [48] + [96] * 3]
                 channels_group = [int(x * multiplier) for x in [16] + [24] * 2 + [40] * 3
                                   + [48] * 2 + [96] * 3]
-                exp_size = [16,72,88,96] + [240] * 2 + [120,144,288] + [576]*2
+                exp_size = [int(x*multiplier) for x in [16,72,88,96] + [240] * 2 + [120,144,288] + [576]*2]
                 strides = [2] * 2 + [1,2] + [1] * 4 + [2] + [1]*2
                 use_se = [True] + [False]*2 + [True]*8
                 kernel_size = [3]*3 + [5]*8
@@ -250,7 +250,7 @@ class MobileNetV3Small(nn.HybridBlock):
                                                        kernel_size=kz,
                                                        hswish = hswish,
                                                        norm_layer=BatchNorm, norm_kwargs=None))
-                _add_conv(self.features,576,hswish=True,
+                _add_conv(self.features,int(576*multiplier),hswish=True,
                           norm_layer=BatchNorm, norm_kwargs=None)
                 #self.features.add(SEBlock(0.25,576))
                 self.features.add(nn.GlobalAvgPool2D())
@@ -302,6 +302,7 @@ def get_mobilenet_v3_large(multiplier, pretrained=False, ctx=cpu(),
 def get_mobilenet_v3_small(multiplier, pretrained=False, ctx=cpu(),
                      root='~/.mxnet/models', norm_layer=BatchNorm, norm_kwargs=None, **kwargs):
     r"""
+
     Parameters
     ----------
     multiplier : float
@@ -326,7 +327,7 @@ def get_mobilenet_v3_small(multiplier, pretrained=False, ctx=cpu(),
     return net
 
 if __name__ == '__main__':
-    net = get_mobilenet_v3_large(1.0)
+    net = get_mobilenet_v3_small(0.75)
     import gluoncv as gcv
     #net = gcv.model_zoo.get_model('mobilenetv2_1.0',pretrained=True)
     net.initialize()
