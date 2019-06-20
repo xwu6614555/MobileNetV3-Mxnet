@@ -3,16 +3,10 @@ Reproduce MobileNetV3 using gluon interface of mxnet
 
 paper: https://arxiv.org/pdf/1905.02244.pdf
 
-our small model is slightly better than paper
+paper small:  top1 is 67.4,  #params 2.9M
 
-our large model is lower than paper, should check details
+our   small:  top1 is 67.79, top5 is 87.53, #params 2.82M
 
-model      |     size(paper)   |   top1(paper)  |   #params(ours)   |   top1(ours)    |  top5(ours)
+paper large:  top1 is 75.2,  #params 5.4M
 
-small-1.0    |     2.9M        |     67.4       |      2.82M        |      67.79      |    87.53
-
-large-1.0    |     5.4M         |    75.2         |    4.87M           |  74.19          |  91.83
-
-small-0.75      istraining...
-
-large-0.75      istraining...
+our   large:  top1 is 74.19, top5 is 91.83, #params 4.87M
