@@ -1,12 +1,8 @@
 # MobileNetV3-Mxnet
-Reproduce MobileNetV3 using gluon interface of mxnet
-
-paper: https://arxiv.org/pdf/1905.02244.pdf
-
-our small model is slightly better than paper
-
-our large model is lower than paper, should check details
-
+Reproduce MobileNetV3 using gluon interface of mxnet \<br>
+paper: https://arxiv.org/pdf/1905.02244.pdf \<br>
+our small model is slightly better than paper \<br>
+our large model is lower than paper, should check details \<br>
 model           size(paper)      top1(paper)     #params(ours)      top1(ours)      top5(ours)
 
 small-1.0         2.9M             67.4             2.82M              67.79           87.53
